@@ -1,1 +1,16 @@
-[{"name":"XTZ-250","type":"Motorcycle","color":"Blue"},{"name":"XTZ-250","type":"Motorcycle","color":"Blue"},{"name":"XTZ-250","type":"Motorcycle","color":"Blue"},{"name":"XR-150","type":"Motorcycle","color":"Blue"},{"name":"XTZ-250","type":"Motorcycle","color":"Blue"},{"name":"XTZ-250","type":"Motorcycle","color":"Blue"}]
+[
+    {
+        "id": "String",
+        "typeService": "String",
+        "typeVehicle": "String",
+        "plate": "String",
+        "ownerName": "String",
+        "ownerNumber": "String",
+        "entryDate": "Date",
+        "departureDate": "Date",
+        "receivableValue": "String",
+        "moneyPaid": "String",
+        "remainigMoney": "String",
+        "serviceState": "String"
+    }
+]

@@ -2,8 +2,7 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema;
 
-
-const Vehicle = Schema({
+const History = Schema({
     id: {
         type: String,
         required: true   
@@ -55,4 +54,4 @@ const Vehicle = Schema({
 })
 
 
-module.exports = mongoose.model('Vehicle', Vehicle)
+module.exports = mongoose.model('History', History)

@@ -1,39 +1,27 @@
+'use strict'
 const { Router } = require('express')
 const router = Router();
-'use strict'
+const { registerVehicle, getAllVehicles, editVehicleById, deleteVehicleById } = require('../usecase/vehicleUsecase')
+const { getAllHistoryChanges, saveHistoryChange, getHistoryChangeById, deleteHistoryChangeById, deleteAllHistoryChanges } = require('../usecase/historyUsecase')
 
-const fs = require('fs')
+//Services Vehicles
+router.get('/getAllVehicles', getAllVehicles)
 
-router.get('/getVehicles', (req, res) => {
-    let data = fs.readFileSync('./src/assets/vehicles.json');
+router.post('/registerVehicle', registerVehicle)
 
-    let vehicles = JSON.parse(data)
+router.put('/editVehicle/:vehicleId', editVehicleById)
 
-    res.json(vehicles)
-})
+router.delete('/deleteVehicle/:vehicleId', deleteVehicleById)
 
-router.post('/registerVehicle', (req, res) => {
+//Services HistoryChanges
+router.get('/getAllHistoryChanges', getAllHistoryChanges)
 
-    let data = fs.readFileSync('./src/assets/vehicles.json');
-    let vehicles = JSON.parse(data)
-    vehicles.push(req.body)
-    let request = JSON.stringify(vehicles)
+router.post('/saveHistoryChange', saveHistoryChange)
 
-    fs.writeFileSync('./src/assets/vehicles.json', request)
+router.get('/getHistoryChange/:historyId', getHistoryChangeById)
 
-    res.json(vehicles)
-})
+router.delete('/deleteHistoryChange/:historyId', deleteHistoryChangeById)
 
-router.put('/editVehicle/:vehicleId', (req, res) => {
-
-    let data = fs.readFileSync('./src/assets/vehicles.json');
-    let vehicles = JSON.parse(data)
-
-    vehicles = vehicles.filter(vehicle => vehicle.id != req.params.vehicleId);
-    vehicles.push(req.body)
-
-    res.json(vehicles)
-
-})
+router.delete('/deleteAllHistoryChanges', deleteAllHistoryChanges)
 
 module.exports = router;
