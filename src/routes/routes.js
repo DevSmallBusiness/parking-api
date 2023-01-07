@@ -1,27 +1,33 @@
-'use strict'
-const { Router } = require('express')
+"use strict";
+const { Router } = require("express");
 const router = Router();
-const { registerVehicle, getAllVehicles, editVehicleById, deleteVehicleById } = require('../usecase/vehicleUsecase')
-const { getAllHistoryChanges, saveHistoryChange, getHistoryChangeById, deleteHistoryChangeById, deleteAllHistoryChanges } = require('../usecase/historyUsecase')
+const { registerVehicle, getAllVehicles, editVehicleById, deleteVehicleById } = require("../usecase/vehicleUsecase");
+const {
+	getAllHistoryChanges,
+	saveHistoryChange,
+	getHistoryChangeById,
+	deleteHistoryChangeById,
+	deleteAllHistoryChanges,
+} = require("../usecase/historyUsecase");
 
 //Services Vehicles
-router.get('/getAllVehicles', getAllVehicles)
+router.get("/vehicles", getAllVehicles);
 
-router.post('/registerVehicle', registerVehicle)
+router.post("/vehicles", registerVehicle);
 
-router.put('/editVehicle/:vehicleId', editVehicleById)
+router.put("/vehicles/:id", editVehicleById);
 
-router.delete('/deleteVehicle/:vehicleId', deleteVehicleById)
+router.delete("/vehicles/:id", deleteVehicleById);
 
 //Services HistoryChanges
-router.get('/getAllHistoryChanges', getAllHistoryChanges)
+router.get("/history", getAllHistoryChanges);
 
-router.post('/saveHistoryChange', saveHistoryChange)
+router.post("/history", saveHistoryChange);
 
-router.get('/getHistoryChange/:historyId', getHistoryChangeById)
+router.get("/history/:id", getHistoryChangeById);
 
-router.delete('/deleteHistoryChange/:historyId', deleteHistoryChangeById)
+router.delete("/history/:id", deleteHistoryChangeById);
 
-router.delete('/deleteAllHistoryChanges', deleteAllHistoryChanges)
+router.delete("/history", deleteAllHistoryChanges);
 
 module.exports = router;
