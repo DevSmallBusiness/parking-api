@@ -12,8 +12,8 @@ export class MongooseSource<T> {
     return await this.model.create(data);
   }
 
-  public async update(id: string, data: T): Promise<Awaited<T> | null> {
-    return await this.model.findByIdAndUpdate(id, { $set: data }, { new: true });
+  public async update(id: string, data: any): Promise<Awaited<T> | null> {
+    return await this.model.findOneAndUpdate({ _id: id }, { $set: data }, { new: true });
   }
 
   public async delete(id: string): Promise<Awaited<T> | null> {

@@ -3,7 +3,7 @@ import { TypeServiceEnum } from "../constants/type-service.enum";
 import { TypeVehicleEnum } from "../constants/type-vehicle.enum";
 
 export interface IVehicleRecord {
-  _id: string;
+  id: string;
   typeService: TypeServiceEnum;
   typeVehicle: TypeVehicleEnum;
   plate: string;
