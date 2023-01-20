@@ -1,5 +1,5 @@
 import { Application } from "express";
-import { vehicleRecordController } from "../../../api/controllers/vehicles-records.controller";
+import { vehiclesRecordsController } from "../../../api/controllers/vehicles-records.controller";
 import { VehiclesRecordsRouter } from "../../../api/routes/vehicles-records.routes";
 import { vehicleRecordModel } from "../../../data/models/vehicle-record.model";
 import { MongooseSource } from "../../../data/mongoose.source";
@@ -40,7 +40,7 @@ export const VehiclesRecordsRouterInitializer = (app: Application): VehiclesReco
     new ResponseMapper()
   );
 
-  const controller = vehicleRecordController(
+  const controller = vehiclesRecordsController(
     createVehicleRecordUseCase,
     getVehiclesRecordsUseCase,
     getVehicleRecordByIdUseCase,

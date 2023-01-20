@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
-export interface VehicleRecordController {
+export interface VehiclesRecordsController {
   handleCreateVehicleRecord: (req: Request, res: Response, next: NextFunction) => Promise<Response | undefined>;
   handleGetVehiclesRecords: (_req: Request, res: Response, next: NextFunction) => Promise<Response | undefined>;
   handleGetVehicleRecordById: (req: Request, res: Response, next: NextFunction) => Promise<Response | undefined>;

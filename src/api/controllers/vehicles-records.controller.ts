@@ -4,15 +4,15 @@ import { DeleteVehicleRecordUseCase } from "../../domain/usecases/vehicles-recor
 import { GetVehicleRecordByIdUseCase } from "../../domain/usecases/vehicles-records/get-vehicle-record-by-id.usecase";
 import { GetVehiclesRecordsUseCase } from "../../domain/usecases/vehicles-records/get-vehicles-records.usecase";
 import { UpdateVehicleRecordUseCase } from "../../domain/usecases/vehicles-records/update-vehicle-record.usecase";
-import { VehicleRecordController } from "./interfaces/vehicles-records-controller.interface";
+import { VehiclesRecordsController } from "./interfaces/vehicles-records-controller.interface";
 
-export const vehicleRecordController = (
+export const vehiclesRecordsController = (
   createVehicleRecordUseCase: CreateVehicleRecordUseCase,
   getVehiclesRecordsUseCase: GetVehiclesRecordsUseCase,
   getVehicleRecordByIdUseCase: GetVehicleRecordByIdUseCase,
   updateVehicleRecordUseCase: UpdateVehicleRecordUseCase,
   deleteVehicleRecordUseCase: DeleteVehicleRecordUseCase
-): VehicleRecordController => ({
+): VehiclesRecordsController => ({
   handleCreateVehicleRecord: async (req: Request, res: Response, next: NextFunction): Promise<Response | undefined> => {
     try {
       const execution = await createVehicleRecordUseCase.execute(req.body);

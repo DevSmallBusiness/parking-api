@@ -1,5 +1,6 @@
 import { HydratedDocument, Model } from "mongoose";
 import { IFilter } from "../core/interfaces/response.interface";
+import { DeleteResult } from "mongodb";
 
 export class MongooseSource<T> {
   private model: Model<any>;
@@ -18,6 +19,10 @@ export class MongooseSource<T> {
 
   public async delete(id: string): Promise<Awaited<T> | null> {
     return await this.model.findByIdAndDelete(id);
+  }
+
+  public async deleteAll(): Promise<DeleteResult> {
+    return await this.model.deleteMany({});
   }
 
   public async findOne(data: any): Promise<Awaited<T> | null> {

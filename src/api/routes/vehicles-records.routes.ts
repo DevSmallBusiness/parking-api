@@ -1,12 +1,12 @@
 import { Application, Router } from "express";
-import { VehicleRecordController } from "../controllers/interfaces/vehicles-records-controller.interface";
+import { VehiclesRecordsController } from "../controllers/interfaces/vehicles-records-controller.interface";
 
 export class VehiclesRecordsRouter {
   private app: Application;
-  private vehicleRecordController: VehicleRecordController;
+  private vehiclesRecordsController: VehiclesRecordsController;
 
-  constructor(vehicleRecordController: VehicleRecordController, app: Application) {
-    this.vehicleRecordController = vehicleRecordController;
+  constructor(vehiclesRecordsController: VehiclesRecordsController, app: Application) {
+    this.vehiclesRecordsController = vehiclesRecordsController;
     this.app = app;
   }
 
@@ -14,14 +14,14 @@ export class VehiclesRecordsRouter {
     const router = Router();
     this.app.use("/api/vehicles", router);
 
-    router.post("/", this.vehicleRecordController.handleCreateVehicleRecord);
+    router.post("/", this.vehiclesRecordsController.handleCreateVehicleRecord);
 
-    router.get("/", this.vehicleRecordController.handleGetVehiclesRecords);
+    router.get("/", this.vehiclesRecordsController.handleGetVehiclesRecords);
 
-    router.get("/:id", this.vehicleRecordController.handleGetVehicleRecordById);
+    router.get("/:id", this.vehiclesRecordsController.handleGetVehicleRecordById);
 
-    router.put("/", this.vehicleRecordController.handleUpdateVehicleRecord);
+    router.put("/", this.vehiclesRecordsController.handleUpdateVehicleRecord);
 
-    router.delete("/:id", this.vehicleRecordController.handleDeleteVehicleRecord);
+    router.delete("/:id", this.vehiclesRecordsController.handleDeleteVehicleRecord);
   }
 }

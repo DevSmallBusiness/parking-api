@@ -3,7 +3,7 @@ import { TypeServiceEnum } from "../constants/type-service.enum";
 import { TypeVehicleEnum } from "../constants/type-vehicle.enum";
 
 export interface IChangeHistory {
-  _id: string;
+  id: string;
   typeService: TypeServiceEnum;
   typeVehicle: TypeVehicleEnum;
   plate: string;
@@ -16,4 +16,9 @@ export interface IChangeHistory {
   moneyPaid: string;
   remainigMoney: string;
   serviceState: ServiceStatesEnum;
+}
+
+export interface IDeleteResult {
+  acknowledged: boolean;
+  deletedCount: number;
 }
