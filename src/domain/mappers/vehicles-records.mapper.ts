@@ -3,7 +3,7 @@ import { IVehicleRecord } from "../../core/interfaces/vehicle-record.interface";
 export class VehicleRecordMapper {
   toVehicleRecord(vehicleRecord: any): IVehicleRecord {
     return {
-      id: vehicleRecord?.id,
+      id: vehicleRecord?._id,
       typeService: vehicleRecord?.typeService,
       typeVehicle: vehicleRecord?.typeVehicle,
       plate: vehicleRecord?.plate,

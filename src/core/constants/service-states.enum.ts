@@ -10,7 +10,7 @@ export const toServiceStatesEnum = (key: string): ServiceStatesEnum => {
   options.set("PENDIENTE", ServiceStatesEnum.outstanding);
   options.set("PAGADO", ServiceStatesEnum.paid);
 
-  return options.get(key?.toString().toLowerCase());
+  return options.get(key);
 };
 
 export const fromServiceStatesEnum = (key: ServiceStatesEnum): string => {

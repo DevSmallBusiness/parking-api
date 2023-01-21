@@ -3,7 +3,7 @@ import { IChangeHistory } from "../../core/interfaces/change-history.interface";
 export class ChangeHistoryMapper {
   toChangeHistory(changeHistory: any): IChangeHistory {
     return {
-      id: changeHistory?.id,
+      id: changeHistory?._id,
       typeService: changeHistory?.typeService,
       typeVehicle: changeHistory?.typeVehicle,
       plate: changeHistory?.plate,

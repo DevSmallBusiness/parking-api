@@ -8,7 +8,7 @@ export const toTypeVehicleEnum = (key: string): TypeVehicleEnum => {
   options.set("CARRO", TypeVehicleEnum.car);
   options.set("MOTO", TypeVehicleEnum.motorcycle);
 
-  return options.get(key?.toString().toLowerCase());
+  return options.get(key);
 };
 
 export const fromTypeVehicleEnum = (key: TypeVehicleEnum): string => {
