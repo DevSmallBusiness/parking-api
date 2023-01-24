@@ -16,7 +16,7 @@ export class VehiclesRecordsRouter {
 
     router.post("/", this.vehiclesRecordsController.handleCreateVehicleRecord);
 
-    router.get("/", this.vehiclesRecordsController.handleGetVehiclesRecords);
+    router.post("/paginated", this.vehiclesRecordsController.handleGetVehiclesRecords);
 
     router.get("/:id", this.vehiclesRecordsController.handleGetVehicleRecordById);
 

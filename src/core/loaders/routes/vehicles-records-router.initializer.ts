@@ -3,6 +3,7 @@ import { vehiclesRecordsController } from "../../../api/controllers/vehicles-rec
 import { VehiclesRecordsRouter } from "../../../api/routes/vehicles-records.routes";
 import { vehicleRecordModel } from "../../../data/models/vehicle-record.model";
 import { MongooseSource } from "../../../data/mongoose.source";
+import { FilterMapper } from "../../../domain/mappers/filter.mapper";
 import { VehicleRecordMapper } from "../../../domain/mappers/vehicles-records.mapper";
 import { ResponseMapper } from "../../../domain/mappers/response.mapper";
 import { VehiclesRecordsRepository } from "../../../domain/repositories/vehicles-records.repository";
@@ -27,6 +28,7 @@ export const VehiclesRecordsRouterInitializer = (app: Application): VehiclesReco
 
   const getVehiclesRecordsUseCase = new GetVehiclesRecordsUseCase(
     new VehiclesRecordsRepository(new MongooseSource(vehicleRecordModel)),
+    new FilterMapper(),
     new ResponseMapper()
   );
 

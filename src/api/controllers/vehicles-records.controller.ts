@@ -22,9 +22,9 @@ export const vehiclesRecordsController = (
       next(err);
     }
   },
-  handleGetVehiclesRecords: async (_req: Request, res: Response, next: NextFunction): Promise<Response | undefined> => {
+  handleGetVehiclesRecords: async (req: Request, res: Response, next: NextFunction): Promise<Response | undefined> => {
     try {
-      const execution = await getVehiclesRecordsUseCase.execute();
+      const execution = await getVehiclesRecordsUseCase.execute(req.body);
       return res.status(200).json(execution);
     } catch (err) {
       res.status(500).send({ error: err, message: "Internal server error" });

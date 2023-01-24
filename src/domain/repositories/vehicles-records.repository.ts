@@ -1,3 +1,4 @@
+import { IFilter } from "../../core/interfaces/response.interface";
 import { IVehicleRecord } from "../../core/interfaces/vehicle-record.interface";
 import { MongooseSource } from "../../data/mongoose.source";
 
@@ -8,8 +9,12 @@ export class VehiclesRecordsRepository {
     this.db = db;
   }
 
-  public async getVehiclesRecords(): Promise<IVehicleRecord[]> {
-    return await this.db.findAll({}, {});
+  public async getVehiclesRecords(filter: IFilter): Promise<IVehicleRecord[]> {
+    return await this.db.findPaginated(filter);
+  }
+
+  public async getTotalVehiclesRecords(filter: { [key: string]: string }): Promise<number> {
+    return await this.db.count(filter);
   }
 
   public async getVehicleRecordById(id: string): Promise<IVehicleRecord | null> {
