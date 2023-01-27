@@ -23,10 +23,9 @@ const vehicleRecordSchema = new Schema(
       required: [true, "Owner number is required"],
     },
     entryDate: { type: Date, default: new Date() },
-    departureDate: { type: Date, default: new Date() },
+    departureDate: { type: Date },
     receivableValue: {
       type: Number,
-      required: [true, "Receivable value is required"],
     },
     moneyPaid: {
       type: Number,

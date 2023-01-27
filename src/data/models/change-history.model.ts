@@ -23,7 +23,7 @@ const changeHistorySchema = new Schema(
       required: [true, "Owner number is required"],
     },
     entryDate: { type: Date, default: new Date() },
-    departureDate: { type: Date, default: new Date() },
+    departureDate: { type: Date },
     creationDate: { type: Date, default: new Date() },
     receivableValue: {
       type: Number,

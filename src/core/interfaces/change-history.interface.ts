@@ -12,9 +12,9 @@ export interface IChangeHistory {
   entryDate: Date;
   departureDate: Date;
   creationDate: Date;
-  receivableValue: string;
-  moneyPaid: string;
-  remainigMoney: string;
+  receivableValue: number;
+  moneyPaid: number;
+  remainigMoney: number;
   serviceState: ServiceStatesEnum;
 }
 

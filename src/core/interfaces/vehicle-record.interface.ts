@@ -11,8 +11,8 @@ export interface IVehicleRecord {
   ownerNumber: string;
   entryDate: Date;
   departureDate: Date;
-  receivableValue: string;
-  moneyPaid?: string;
-  remainigMoney?: string;
+  receivableValue: number;
+  moneyPaid?: number;
+  remainigMoney?: number;
   serviceState?: ServiceStatesEnum;
 }
