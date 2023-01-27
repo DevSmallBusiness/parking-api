@@ -12,6 +12,7 @@ import { DeleteVehicleRecordUseCase } from "../../../domain/usecases/vehicles-re
 import { GetVehicleRecordByIdUseCase } from "../../../domain/usecases/vehicles-records/get-vehicle-record-by-id.usecase";
 import { GetVehiclesRecordsUseCase } from "../../../domain/usecases/vehicles-records/get-vehicles-records.usecase";
 import { UpdateVehicleRecordUseCase } from "../../../domain/usecases/vehicles-records/update-vehicle-record.usecase";
+import { SetStateExpiredToVehiclesUseCase } from "../../../domain/usecases/vehicles-records/set-state-expired.usecase";
 
 export const VehiclesRecordsRouterInitializer = (app: Application): VehiclesRecordsRouter => {
   const createVehicleRecordUseCase = new CreateVehicleRecordUseCase(
@@ -42,12 +43,17 @@ export const VehiclesRecordsRouterInitializer = (app: Application): VehiclesReco
     new ResponseMapper()
   );
 
+  const setStateExpiredToVehiclesUseCase = new SetStateExpiredToVehiclesUseCase(
+    new VehiclesRecordsRepository(new MongooseSource(vehicleRecordModel))
+  )
+
   const controller = vehiclesRecordsController(
     createVehicleRecordUseCase,
     getVehiclesRecordsUseCase,
     getVehicleRecordByIdUseCase,
     updateVehicleRecordUseCase,
-    deleteVehicleRecordUseCase
+    deleteVehicleRecordUseCase,
+    setStateExpiredToVehiclesUseCase
   );
 
   return new VehiclesRecordsRouter(controller, app);

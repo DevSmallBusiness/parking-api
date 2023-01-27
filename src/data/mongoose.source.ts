@@ -44,4 +44,9 @@ export class MongooseSource<T> {
   public async count(filter: { [key: string]: string }): Promise<number> {
     return await this.model.countDocuments(filter);
   }
+
+  public async setStateExpiredToVehicles(): Promise<null> {
+    await this.model.updateMany({$lte: {departureDate: new Date()}, $ne: {serviceState:"PAGADO"} }, {$set: {serviceState:"VENCIDO"}});
+    return null
+  }
 }
