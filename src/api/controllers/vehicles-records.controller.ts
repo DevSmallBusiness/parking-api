@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { CreateVehicleRecordUseCase } from "../../domain/usecases/vehicles-records/create-vehicle-record.usecase";
+import { CreateChangeHistoryUseCase } from "../../domain/usecases/changes-history/create-change-history.usecase";
 import { DeleteVehicleRecordUseCase } from "../../domain/usecases/vehicles-records/delete-vehicle-record.usecase";
 import { GetVehicleRecordByIdUseCase } from "../../domain/usecases/vehicles-records/get-vehicle-record-by-id.usecase";
 import { GetVehiclesRecordsUseCase } from "../../domain/usecases/vehicles-records/get-vehicles-records.usecase";
@@ -11,11 +12,17 @@ export const vehiclesRecordsController = (
   getVehiclesRecordsUseCase: GetVehiclesRecordsUseCase,
   getVehicleRecordByIdUseCase: GetVehicleRecordByIdUseCase,
   updateVehicleRecordUseCase: UpdateVehicleRecordUseCase,
-  deleteVehicleRecordUseCase: DeleteVehicleRecordUseCase
+  deleteVehicleRecordUseCase: DeleteVehicleRecordUseCase,
+  createChangeHistoryUseCase: CreateChangeHistoryUseCase
 ): VehiclesRecordsController => ({
   handleCreateVehicleRecord: async (req: Request, res: Response, next: NextFunction): Promise<Response | undefined> => {
     try {
       const execution = await createVehicleRecordUseCase.execute(req.body);
+
+      if (execution.result?.serviceState === "PAGADO") {
+        await createChangeHistoryUseCase.execute(req.body);
+      }
+
       return res.status(200).json(execution);
     } catch (err) {
       res.status(500).send({ error: err, message: "Internal server error" });
@@ -43,6 +50,11 @@ export const vehiclesRecordsController = (
   handleUpdateVehicleRecord: async (req: Request, res: Response, next: NextFunction): Promise<Response | undefined> => {
     try {
       const execution = await updateVehicleRecordUseCase.execute(req.body);
+
+      if (execution.result?.serviceState === "PAGADO") {
+        await createChangeHistoryUseCase.execute(req.body);
+      }
+
       return res.status(200).json(execution);
     } catch (err) {
       res.status(500).send({ error: err, message: "Internal server error" });

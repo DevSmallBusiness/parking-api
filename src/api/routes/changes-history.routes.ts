@@ -12,7 +12,7 @@ export class ChangesHistoryRouter {
 
   init() {
     const router = Router();
-    this.app.use("/api/changes", router);
+    this.app.use("/api/history", router);
 
     router.post("/", this.changesHistoryController.handleCreateChangeHistory);
 

@@ -12,6 +12,10 @@ import { DeleteVehicleRecordUseCase } from "../../../domain/usecases/vehicles-re
 import { GetVehicleRecordByIdUseCase } from "../../../domain/usecases/vehicles-records/get-vehicle-record-by-id.usecase";
 import { GetVehiclesRecordsUseCase } from "../../../domain/usecases/vehicles-records/get-vehicles-records.usecase";
 import { UpdateVehicleRecordUseCase } from "../../../domain/usecases/vehicles-records/update-vehicle-record.usecase";
+import { CreateChangeHistoryUseCase } from "../../../domain/usecases/changes-history/create-change-history.usecase";
+import { ChangesHistoryRepository } from "../../../domain/repositories/changes-history.repository";
+import { changeHistoryModel } from "../../../data/models/change-history.model";
+import { ChangeHistoryMapper } from "../../../domain/mappers/changes-history.mapper";
 
 export const VehiclesRecordsRouterInitializer = (app: Application): VehiclesRecordsRouter => {
   const createVehicleRecordUseCase = new CreateVehicleRecordUseCase(
@@ -42,12 +46,19 @@ export const VehiclesRecordsRouterInitializer = (app: Application): VehiclesReco
     new ResponseMapper()
   );
 
+  const createChangeHistoryUseCase = new CreateChangeHistoryUseCase(
+    new ChangesHistoryRepository(new MongooseSource(changeHistoryModel)),
+    new ResponseMapper(),
+    new ChangeHistoryMapper()
+  );
+
   const controller = vehiclesRecordsController(
     createVehicleRecordUseCase,
     getVehiclesRecordsUseCase,
     getVehicleRecordByIdUseCase,
     updateVehicleRecordUseCase,
-    deleteVehicleRecordUseCase
+    deleteVehicleRecordUseCase,
+    createChangeHistoryUseCase
   );
 
   return new VehiclesRecordsRouter(controller, app);
