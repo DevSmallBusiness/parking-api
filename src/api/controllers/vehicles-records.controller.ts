@@ -4,6 +4,7 @@ import { CreateChangeHistoryUseCase } from "../../domain/usecases/changes-histor
 import { DeleteVehicleRecordUseCase } from "../../domain/usecases/vehicles-records/delete-vehicle-record.usecase";
 import { GetVehicleRecordByIdUseCase } from "../../domain/usecases/vehicles-records/get-vehicle-record-by-id.usecase";
 import { GetVehiclesRecordsUseCase } from "../../domain/usecases/vehicles-records/get-vehicles-records.usecase";
+import { SetStateExpiredToVehiclesUseCase } from "../../domain/usecases/vehicles-records/set-state-expired.usecase";
 import { UpdateVehicleRecordUseCase } from "../../domain/usecases/vehicles-records/update-vehicle-record.usecase";
 import { VehiclesRecordsController } from "./interfaces/vehicles-records-controller.interface";
 
@@ -13,7 +14,8 @@ export const vehiclesRecordsController = (
   getVehicleRecordByIdUseCase: GetVehicleRecordByIdUseCase,
   updateVehicleRecordUseCase: UpdateVehicleRecordUseCase,
   deleteVehicleRecordUseCase: DeleteVehicleRecordUseCase,
-  createChangeHistoryUseCase: CreateChangeHistoryUseCase
+  createChangeHistoryUseCase: CreateChangeHistoryUseCase,
+  setStateExpiredToVehiclesUseCase: SetStateExpiredToVehiclesUseCase
 ): VehiclesRecordsController => ({
   handleCreateVehicleRecord: async (req: Request, res: Response, next: NextFunction): Promise<Response | undefined> => {
     try {
@@ -65,6 +67,15 @@ export const vehiclesRecordsController = (
     try {
       const execution = await deleteVehicleRecordUseCase.execute(req.params.id);
       return res.status(200).json(execution);
+    } catch (err) {
+      res.status(500).send({ error: err, message: "Internal server error" });
+      next(err);
+    }
+  },
+  handleSetStateExpiredToVehicle: async (res: Response, next: NextFunction): Promise<Response | undefined> => {
+    try {
+      await setStateExpiredToVehiclesUseCase.execute();
+      return res.status(200).json("state of vehicles to expired ok!");
     } catch (err) {
       res.status(500).send({ error: err, message: "Internal server error" });
       next(err);

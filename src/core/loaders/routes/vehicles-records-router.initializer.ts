@@ -16,6 +16,7 @@ import { CreateChangeHistoryUseCase } from "../../../domain/usecases/changes-his
 import { ChangesHistoryRepository } from "../../../domain/repositories/changes-history.repository";
 import { changeHistoryModel } from "../../../data/models/change-history.model";
 import { ChangeHistoryMapper } from "../../../domain/mappers/changes-history.mapper";
+import { SetStateExpiredToVehiclesUseCase } from "../../../domain/usecases/vehicles-records/set-state-expired.usecase";
 
 export const VehiclesRecordsRouterInitializer = (app: Application): VehiclesRecordsRouter => {
   const createVehicleRecordUseCase = new CreateVehicleRecordUseCase(
@@ -51,6 +52,9 @@ export const VehiclesRecordsRouterInitializer = (app: Application): VehiclesReco
     new ResponseMapper(),
     new ChangeHistoryMapper()
   );
+  const setStateExpiredToVehiclesUseCase = new SetStateExpiredToVehiclesUseCase(
+    new VehiclesRecordsRepository(new MongooseSource(vehicleRecordModel))
+  );
 
   const controller = vehiclesRecordsController(
     createVehicleRecordUseCase,
@@ -58,7 +62,8 @@ export const VehiclesRecordsRouterInitializer = (app: Application): VehiclesReco
     getVehicleRecordByIdUseCase,
     updateVehicleRecordUseCase,
     deleteVehicleRecordUseCase,
-    createChangeHistoryUseCase
+    createChangeHistoryUseCase,
+    setStateExpiredToVehiclesUseCase
   );
 
   return new VehiclesRecordsRouter(controller, app);

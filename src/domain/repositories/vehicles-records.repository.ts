@@ -32,4 +32,8 @@ export class VehiclesRecordsRepository {
   public async deleteVehicleRecord(id: string): Promise<IVehicleRecord | null> {
     return await this.db.delete(id);
   }
+
+  public async setStateExpiredToVehicles(): Promise<null> {
+    return await this.db.setStateExpiredToVehicles();
+  }
 }
