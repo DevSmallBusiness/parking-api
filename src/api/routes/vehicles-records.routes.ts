@@ -18,6 +18,8 @@ export class VehiclesRecordsRouter {
 
     router.post("/paginated", this.vehiclesRecordsController.handleGetVehiclesRecords);
 
+    router.post("/set-state-expired", this.vehiclesRecordsController.handleSetStateExpiredToVehicle);
+
     router.get("/:id", this.vehiclesRecordsController.handleGetVehicleRecordById);
 
     router.put("/", this.vehiclesRecordsController.handleUpdateVehicleRecord);

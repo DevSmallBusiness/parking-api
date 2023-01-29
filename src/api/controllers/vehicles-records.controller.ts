@@ -86,7 +86,7 @@ export const vehiclesRecordsController = (
       next(err);
     }
   },
-  handleSetStateExpiredToVehicle: async (res: Response, next: NextFunction): Promise<Response | undefined> => {
+  handleSetStateExpiredToVehicle: async (_req: Request, res: Response, next: NextFunction): Promise<Response | undefined> => {
     try {
       await setStateExpiredToVehiclesUseCase.execute();
       return res.status(200).json("state of vehicles to expired ok!");

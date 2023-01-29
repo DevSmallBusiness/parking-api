@@ -51,7 +51,7 @@ export class MongooseSource<T> {
 
   public async setStateExpiredToVehicles(): Promise<null> {
     await this.model.updateMany(
-      { $lte: { departureDate: new Date() }, $ne: { serviceState: "PAGADO" } },
+      { departureDate: { $lte: new Date() }, serviceState: { $ne: "PAGADO" } },
       { $set: { serviceState: "VENCIDO" } }
     );
     return null;
