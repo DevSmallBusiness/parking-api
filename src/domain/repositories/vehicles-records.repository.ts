@@ -1,3 +1,4 @@
+import { IDeleteResult } from "../../core/interfaces/change-history.interface";
 import { IFilter } from "../../core/interfaces/response.interface";
 import { IVehicleRecord } from "../../core/interfaces/vehicle-record.interface";
 import { MongooseSource } from "../../data/mongoose.source";
@@ -31,6 +32,10 @@ export class VehiclesRecordsRepository {
 
   public async deleteVehicleRecord(id: string): Promise<IVehicleRecord | null> {
     return await this.db.delete(id);
+  }
+
+  public async deleteAllByFiled(filter: any): Promise<IDeleteResult> {
+    return await this.db.deleteAllByFiled(filter);
   }
 
   public async setStateExpiredToVehicles(): Promise<null> {

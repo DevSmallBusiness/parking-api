@@ -15,11 +15,6 @@ export class DeleteAllChangesHistoryUseCase {
 
   public async execute(): Promise<IResponse<IDeleteResult>> {
     const deleteResult = await this.repository.deleteAllChangesHistory();
-
-    if (deleteResult?.deletedCount < 1) {
-      return this.responseMapper.toResponse(null, messages.deleteFailure("changes history"));
-    }
-
     return this.responseMapper.toResponse(deleteResult, messages.deleteSuccess("changes history"));
   }
 }

@@ -23,5 +23,7 @@ export class VehiclesRecordsRouter {
     router.put("/", this.vehiclesRecordsController.handleUpdateVehicleRecord);
 
     router.delete("/:id", this.vehiclesRecordsController.handleDeleteVehicleRecord);
+
+    router.delete("/", this.vehiclesRecordsController.handleDeleteAllByField);
   }
 }

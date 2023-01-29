@@ -6,5 +6,6 @@ export interface VehiclesRecordsController {
   handleGetVehicleRecordById: (req: Request, res: Response, next: NextFunction) => Promise<Response | undefined>;
   handleUpdateVehicleRecord: (req: Request, res: Response, next: NextFunction) => Promise<Response | undefined>;
   handleDeleteVehicleRecord: (req: Request, res: Response, next: NextFunction) => Promise<Response | undefined>;
+  handleDeleteAllByField: (req: Request, res: Response, next: NextFunction) => Promise<Response | undefined>;
   handleSetStateExpiredToVehicle: (res: Response, next: NextFunction) => Promise<Response | undefined>;
 }

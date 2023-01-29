@@ -7,6 +7,7 @@ import { GetVehiclesRecordsUseCase } from "../../domain/usecases/vehicles-record
 import { SetStateExpiredToVehiclesUseCase } from "../../domain/usecases/vehicles-records/set-state-expired.usecase";
 import { UpdateVehicleRecordUseCase } from "../../domain/usecases/vehicles-records/update-vehicle-record.usecase";
 import { VehiclesRecordsController } from "./interfaces/vehicles-records-controller.interface";
+import { DeleteAllByFieldUseCase } from "../../domain/usecases/vehicles-records/delete-all-by-field.usecase";
 
 export const vehiclesRecordsController = (
   createVehicleRecordUseCase: CreateVehicleRecordUseCase,
@@ -14,6 +15,7 @@ export const vehiclesRecordsController = (
   getVehicleRecordByIdUseCase: GetVehicleRecordByIdUseCase,
   updateVehicleRecordUseCase: UpdateVehicleRecordUseCase,
   deleteVehicleRecordUseCase: DeleteVehicleRecordUseCase,
+  deleteAllByFieldUseCase: DeleteAllByFieldUseCase,
   createChangeHistoryUseCase: CreateChangeHistoryUseCase,
   setStateExpiredToVehiclesUseCase: SetStateExpiredToVehiclesUseCase
 ): VehiclesRecordsController => ({
@@ -66,6 +68,18 @@ export const vehiclesRecordsController = (
   handleDeleteVehicleRecord: async (req: Request, res: Response, next: NextFunction): Promise<Response | undefined> => {
     try {
       const execution = await deleteVehicleRecordUseCase.execute(req.params.id);
+      return res.status(200).json(execution);
+    } catch (err) {
+      res.status(500).send({ error: err, message: "Internal server error" });
+      next(err);
+    }
+  },
+  handleDeleteAllByField: async (req: Request, res: Response, next: NextFunction): Promise<Response | undefined> => {
+    try {
+      const field = req.query.field as any;
+      const value = req.query.value;
+      const filter = { [field]: value };
+      const execution = await deleteAllByFieldUseCase.execute(filter);
       return res.status(200).json(execution);
     } catch (err) {
       res.status(500).send({ error: err, message: "Internal server error" });

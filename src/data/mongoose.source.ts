@@ -25,6 +25,10 @@ export class MongooseSource<T> {
     return await this.model.deleteMany({});
   }
 
+  public async deleteAllByFiled(filter: any): Promise<DeleteResult> {
+    return await this.model.deleteMany(filter);
+  }
+
   public async findOne(data: any): Promise<Awaited<T> | null> {
     return await this.model.findOne(data).lean();
   }
@@ -46,7 +50,10 @@ export class MongooseSource<T> {
   }
 
   public async setStateExpiredToVehicles(): Promise<null> {
-    await this.model.updateMany({$lte: {departureDate: new Date()}, $ne: {serviceState:"PAGADO"} }, {$set: {serviceState:"VENCIDO"}});
-    return null
+    await this.model.updateMany(
+      { $lte: { departureDate: new Date() }, $ne: { serviceState: "PAGADO" } },
+      { $set: { serviceState: "VENCIDO" } }
+    );
+    return null;
   }
 }

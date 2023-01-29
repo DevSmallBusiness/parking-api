@@ -17,6 +17,7 @@ import { ChangesHistoryRepository } from "../../../domain/repositories/changes-h
 import { changeHistoryModel } from "../../../data/models/change-history.model";
 import { ChangeHistoryMapper } from "../../../domain/mappers/changes-history.mapper";
 import { SetStateExpiredToVehiclesUseCase } from "../../../domain/usecases/vehicles-records/set-state-expired.usecase";
+import { DeleteAllByFieldUseCase } from "../../../domain/usecases/vehicles-records/delete-all-by-field.usecase";
 
 export const VehiclesRecordsRouterInitializer = (app: Application): VehiclesRecordsRouter => {
   const createVehicleRecordUseCase = new CreateVehicleRecordUseCase(
@@ -47,11 +48,17 @@ export const VehiclesRecordsRouterInitializer = (app: Application): VehiclesReco
     new ResponseMapper()
   );
 
+  const deleteAllByFieldUseCase = new DeleteAllByFieldUseCase(
+    new VehiclesRecordsRepository(new MongooseSource(vehicleRecordModel)),
+    new ResponseMapper()
+  );
+
   const createChangeHistoryUseCase = new CreateChangeHistoryUseCase(
     new ChangesHistoryRepository(new MongooseSource(changeHistoryModel)),
     new ResponseMapper(),
     new ChangeHistoryMapper()
   );
+
   const setStateExpiredToVehiclesUseCase = new SetStateExpiredToVehiclesUseCase(
     new VehiclesRecordsRepository(new MongooseSource(vehicleRecordModel))
   );
@@ -62,6 +69,7 @@ export const VehiclesRecordsRouterInitializer = (app: Application): VehiclesReco
     getVehicleRecordByIdUseCase,
     updateVehicleRecordUseCase,
     deleteVehicleRecordUseCase,
+    deleteAllByFieldUseCase,
     createChangeHistoryUseCase,
     setStateExpiredToVehiclesUseCase
   );
