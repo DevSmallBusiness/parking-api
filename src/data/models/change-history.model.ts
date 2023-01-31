@@ -27,19 +27,15 @@ const changeHistorySchema = new Schema(
     creationDate: { type: Date, default: new Date() },
     receivableValue: {
       type: Number,
-      required: [true, "Receivable value is required"],
     },
     moneyPaid: {
       type: Number,
-      required: [true, "Money paid is required"],
     },
     remainigMoney: {
       type: Number,
-      required: [true, "Remainig money is required"],
     },
     serviceState: {
       type: String,
-      required: [true, "Service state is required"],
     },
   },
   { collection: "ChangesHistory" }

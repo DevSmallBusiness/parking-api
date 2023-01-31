@@ -13,7 +13,7 @@ export class MongooseSource<T> {
     return await this.model.create(data);
   }
 
-  public async update(id: string, data: any): Promise<Awaited<T> | null> {
+  public async update(id: string | undefined, data: any): Promise<Awaited<T> | null> {
     return await this.model.findOneAndUpdate({ _id: id }, { $set: data }, { new: true });
   }
 

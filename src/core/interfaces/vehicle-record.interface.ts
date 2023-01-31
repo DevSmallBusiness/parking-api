@@ -3,7 +3,7 @@ import { TypeServiceEnum } from "../constants/type-service.enum";
 import { TypeVehicleEnum } from "../constants/type-vehicle.enum";
 
 export interface IVehicleRecord {
-  id: string;
+  id?: string;
   typeService: TypeServiceEnum;
   typeVehicle: TypeVehicleEnum;
   plate: string;
@@ -11,7 +11,7 @@ export interface IVehicleRecord {
   ownerNumber: string;
   entryDate: Date;
   departureDate: Date;
-  receivableValue: number;
+  receivableValue?: number;
   moneyPaid?: number;
   remainigMoney?: number;
   serviceState?: ServiceStatesEnum;
